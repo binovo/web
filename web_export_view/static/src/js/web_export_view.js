@@ -98,7 +98,8 @@ odoo.define('web_export_view', function (require) {
                                 }
                                 var is_number =
                                     $cell.hasClass('o_list_number') &&
-                                    !$cell.hasClass('o_float_time_cell');
+                                    !$cell.hasClass('o_float_time_cell')
+                                    && text.search(/^[\d]/);
                                 if (is_number) {
                                     var db_params = _t.database.parameters;
                                     export_row.push(parseFloat(
