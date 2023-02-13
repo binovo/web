@@ -109,6 +109,10 @@ Features for computers:
 
   .. image:: https://raw.githubusercontent.com/OCA/web/12.0/web_responsive/static/img/document_viewer.gif
 
+* Bigger checkboxes in list view
+
+  .. image:: https://raw.githubusercontent.com/OCA/web/12.0/web_responsive/static/img/big_checkboxes.gif
+
 **Table of contents**
 
 .. contents::
@@ -119,10 +123,13 @@ Usage
 
 The following keyboard shortcuts are implemented:
 
-* Toggle app drawer - ``Alt + Shift + H``
+* Toggle app drawer - ``Alt + Shift + A``
 * Navigate app search results - Arrow keys
 * Choose app result - ``Enter``
 * ``Esc`` to close app drawer
+
+
+Also you can access to the user menu, with ``Alt + Shift + U``
 
 Known issues / Roadmap
 ======================

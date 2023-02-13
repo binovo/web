@@ -27,7 +27,7 @@ odoo.define('web_edit_user_filter', function (require) {
                 json_facet.values = facet.get('values');
 
                 _.each(json_facet.values, function (value, i) {
-                    if (typeof value.value === 'object' &&
+                    if (typeof value.value === 'object' && value.value !== null &&
                         'attrs' in value.value) {
                         json_facet.values[i] = {
                             attrs: value.value.attrs,
@@ -158,6 +158,10 @@ odoo.define('web_edit_user_filter', function (require) {
          */
         _removeValue: function (model, value) {
             var toRemove = model.values.filter(function (v) {
+                if (v.attributes.value == null) {
+                    // Use label if value is not set (eg: pivot time range)
+                    return v.attributes.label === value;
+                }
                 if (typeof v.attributes.value === 'object') {
                     return v.attributes.value.attrs.domain === value;
                 }
