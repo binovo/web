@@ -99,21 +99,28 @@ odoo.define('web_export_view', function (require) {
                                 var is_number =
                                     $cell.hasClass('o_list_number') &&
                                     !$cell.hasClass('o_float_time_cell')
-                                    && text.search(/^[\d]/);
                                 if (is_number) {
                                     var db_params = _t.database.parameters;
-                                    export_row.push(parseFloat(
-                                        text
-                                        // Remove thousands separator
-                                            .split(db_params.thousands_sep)
-                                            .join("")
-                                            // Always use a `.` as decimal
-                                            // separator
-                                            .replace(db_params.decimal_point,
-                                                ".")
-                                            // Remove non-numeric characters
-                                            .replace(/[^\d.-]/g, "")
-                                    ));
+                                    var time = /^(\d{1,2}):(\d{2})$/;
+                                    var match = text.match(time);
+                                    if (match) {
+                                        // Convert hours to days
+                                        var days = (parseFloat(match[1]) + parseFloat(match[2])/60) / 24;
+                                        export_row.push(days);
+                                    } else {
+                                        export_row.push(parseFloat(
+                                            text
+                                            // Remove thousands separator
+                                                .split(db_params.thousands_sep)
+                                                .join("")
+                                                // Always use a `.` as decimal
+                                                // separator
+                                                .replace(db_params.decimal_point,
+                                                    ".")
+                                                // Remove non-numeric characters
+                                                .replace(/[^\d.-]/g, "")
+                                        ));
+                                    }
                                 } else {
                                     export_row.push(text);
                                 }
